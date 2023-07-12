@@ -1,0 +1,87 @@
+{% extends 'base.html' %} 
+
+{% load static %} 
+
+{% block css_files %}
+
+      <link rel="stylesheet" href="{% static 'weather/includes/header.css' %}">
+      <link rel="stylesheet" href="{% static 'weather/data.css' %}">
+
+
+{% endblock %}
+
+
+{% block content %}
+
+    {% include 'weather/includes/header.html' %} 
+
+    {% if context1 %}
+
+    <div class="container">
+
+        
+        
+        <div class="n1">
+            <h1 class="title">Current Weather</h1>
+
+        <h1>{{context1.temp}}&#176C</h1>
+        <p>{{context1.description}}</p>
+        <img src="http://api.openweathermap.org/img/w/{{context1.icon}}.png">
+        <p id="feel">Feels like {{context1.feels_like}}&#176C</p>
+
+    </div>
+
+    <div class="n2">
+     
+        <p>Humidity:{{context1.humidity}}&#37</p>
+        <p>{{context1.pressure}}hPa</p>
+        <p>{{context1.speed}}m/s</p>
+
+    </div>
+
+
+    </div>
+
+    {% endif %} 
+
+
+    {% if context2 %}  
+
+    <div class="con">
+
+    <h2 class="tt">3-Hours Forecast (5-Days)</h2>
+
+</div>
+
+    <div class="forecast-container">
+
+    {% for item in context2 %}
+
+   
+
+    <div class="forecast">
+
+    <h3>{{item.day}}</h3>
+    <h4>{{item.time}}</h4>
+    <p>{{item.min_temp}}&#176C-{{item.max_temp}}&#176C</p> 
+    <p>{{item.description}}</p>
+    <img src="http://api.openweathermap.org/img/w/{{item.icon}}.png">
+    <p>Feels like {{item.feels_like}}&#176C</p>
+    <p>{{item.humidity}}</p> 
+  
+
+</div>
+
+
+
+    {% endfor %}
+
+
+</div>
+
+    {% endif %}
+
+    <P id="special">{{text}}</P>
+
+
+{% endblock %}

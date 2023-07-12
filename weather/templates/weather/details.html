@@ -1,0 +1,53 @@
+
+{% extends "base.html" %} 
+{% load static %}
+
+
+
+{% block css_files %}
+ 
+
+      <link rel="stylesheet" href="{% static 'weather/includes/header.css' %}">
+      <link rel="stylesheet" href="{% static 'weather/details.css' %}">
+
+
+{% endblock %}
+
+
+{% block content %}
+
+    {% include 'weather/includes/header.html' %} 
+    <form id='comment-form' action="/" method="POST">
+        {% csrf_token %}
+
+        {% for i in form %} 
+
+        <div class="form-control {% if i.errors %}invalid{% endif %}">
+
+        
+
+        {{i.label_tag}} 
+
+        {{i}} 
+
+
+        {{i.errors}}
+
+        </div>
+
+
+
+
+        {% endfor %}
+
+    
+
+        <button id='btn' type="submit">Submit</button>
+
+
+    </form>
+
+    <p id="warning">Note: Detailing type can be current or 3hours !</p>
+
+{% endblock %}
+    
